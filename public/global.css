@@ -1,0 +1,101 @@
+/*********** Basic style like font ***************/
+html, body {
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
+
+body {
+	/* some clearing rules */
+	margin: 0;
+	padding: 0;
+	/* https://developer.mozilla.org/en-US/docs/Web/CSS/box-sizing */
+	box-sizing: border-box;
+}
+
+/************ readability optimisation content styling *************/
+body {
+	font-family: -apple-system, Helvetica, "Helvetica Neue", Roboto, Arial, sans-serif;
+	/* font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif; */
+	
+	/* center readingWrapper in body */
+	display: flex;
+	justify-content: center;
+}
+
+article.readingWrapper {
+	max-width: 65vw;
+
+	/* so not to edge of scroll start or end */
+	margin-top: 10vh;
+	margin-bottom: 100px;
+
+	/* readability improves */
+	line-height: 1.4em;
+
+	/* so scrollbar doesn't spawn in and out */
+	min-height: 105vh;
+}
+
+@media (min-width: 1024px) {
+	/* desktop pc reduce line wideness */
+	article.readingWrapper {
+		max-width: 50vw;
+	}
+}
+
+@media (max-width: 1024px) {
+	/* phones basically */
+	article.readingWrapper {
+		max-width: 90vw;
+	}
+}
+
+/************** dark mode switch body ****************/
+body {
+	/* for switching bg dark light mode */
+	transition: background-color 0.3s
+}
+
+body.light-mode {
+	/* light mode default */
+	background-color: #f2eee2;
+	color: #333;
+}
+
+body.dark-mode {
+	background-color: #171c20;
+	color: #bfc2c7;
+}
+
+
+/*************** own custom styling ************/
+h1 {
+	font-size: 1.5em;
+	font-weight: 300;
+}
+
+/* TODO introduce sass and shorten all these https://daveceddia.com/svelte-with-sass-in-vscode/ */
+body.light-mode h1 {
+	color: #ff3e00;
+}
+
+body.dark-mode h1 {
+	color: #4ca9fc;
+}
+
+body.light-mode a {
+	/* TODO scss for all this */
+	color: rgb(3, 86, 168);
+}
+body.dark-mode a {
+	color: rgb(43, 145, 247);
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
