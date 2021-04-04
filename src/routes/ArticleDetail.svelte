@@ -51,57 +51,62 @@
 			<h1>{article.title}</h1>
 			<h2>{article.byline}</h2>
 
-			<div class="detailRow">
+			<div class="masonry">
 				<div class="articleTxtColumn">
 					<p>{@html article.content}</p>
-					<a href={articleUrlFromslug()} target="_blank"
+					<a class="moreInfo" href={articleUrlFromslug()} target="_blank"
 						>Original auf www.osthessen-zeitung.de</a
 					>
 				</div>
-				<div class="imageColumn">
-					{#each article.imageUrls as url}
-						<div
-							class="articleImg"
-							style="background-image: url('{url}');"
-						/>
-					{/each}
-				</div>
+				{#each article.imageUrls as url}
+					<div
+						class="articleImg"
+						style="background-image: url('{url}');"
+					/>
+				{/each}
 			</div>
 		</article>
 	{/await}
 </main>
 
 <style>
-	.detailRow {
+	/* masonry inspiration from https://css-tricks.com/piecing-together-approaches-for-a-css-masonry-layout/ */
+	.masonry {
 		display: flex;
-		/* desktop side by side */
-		flex-direction: row;
+		flex-wrap: wrap;
 	}
 
-	@media (max-width: 640px) {
-		/* phones basically */
-		.detailRow {
-			/* under the article */
-			flex-direction: column;
-		}
+	.masonry div {
+		margin: 0 1rem 1rem 0;
 	}
 
-	.imageColumn {
-		margin-left: 25px;
-
-		flex-direction: column;
-		flex-basis: auto;
-		align-items: flex-start;
-		justify-content: flex-start;
+	.articleTxtColumn {
+		max-width: 55%;
 	}
 
 	.articleImg {
-		flex-grow: 1;
-		width: 20vw;
-		height: 35vh;
-		margin: 10px;
+		/* background: #25313a3f; */
+		flex: 1 0 auto;
+
+		min-height: 20vh;
+		min-width: 15vw;
+
 		background-size: contain;
 		background-repeat: no-repeat;
-		background-position: center;
+		/* background-position: center; */
+		background-position: top center;
+	}
+
+	/* on phones require bigger widths for text and images */
+	@media (max-width: 1024px) {
+		.articleTxtColumn {
+			/* Full width for article */
+			max-width: 100%;
+		}
+
+		.articleImg {
+			min-height: 30vh;
+			min-width: 45vw;
+		}
 	}
 </style>
