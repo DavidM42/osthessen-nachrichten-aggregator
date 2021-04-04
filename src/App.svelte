@@ -21,11 +21,11 @@
 	</nav>
 
 	<!-- TODO better way than prefixing project name eventually or just own subdomain -->
-	<Route path="/svelte-osthessen-zeitung/article/:encodedArticleSlug" component="{ArticleDetail}"/>
+	<Route path="article/:encodedArticleSlug" component="{ArticleDetail}"/>
 	<!-- <Route path="article/:articleUrl" let:params>
 		<ArticleDetail articleUrl="{params.articleUrl}" />
 	</Route> -->
-    <Route path="/svelte-osthessen-zeitung/" component="{Homepage}"/>
+    <Route path="" component="{Homepage}"/>
 </Router>
 
 <style>
