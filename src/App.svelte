@@ -20,11 +20,12 @@
 		<!-- <Link to="blog">Blog</Link> -->
 	</nav>
 
-	<Route path="article/:encodedArticleSlug" component="{ArticleDetail}"/>
+	<!-- TODO better way than prefixing project name eventually or just own subdomain -->
+	<Route path="/svelte-osthessen-zeitung/article/:encodedArticleSlug" component="{ArticleDetail}"/>
 	<!-- <Route path="article/:articleUrl" let:params>
 		<ArticleDetail articleUrl="{params.articleUrl}" />
 	</Route> -->
-    <Route path="/" component="{Homepage}"/>
+    <Route path="/svelte-osthessen-zeitung/" component="{Homepage}"/>
 </Router>
 
 <style>
