@@ -1,14 +1,13 @@
 <script lang="ts">
     import { navigate } from "svelte-routing";
 
-
     // for icon use https://cweili.github.io/svelte-fa/
     import Fa from 'svelte-fa';
     import { faStepBackward } from '@fortawesome/free-solid-svg-icons';
 
     function goHome() {
-        navigate("/")
-        // history.back() // native js browser reloads
+        // navigate("/") // breaks gh pages
+        history.back() // native js browser reloads
     }
 </script>
 

@@ -1,4 +1,4 @@
-name: Svelte built & gh-Pages deploy
+name: Svelte build & gh-Pages deploy
 
 on:
   push:

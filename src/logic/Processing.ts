@@ -17,6 +17,7 @@ export class Processing {
         /* Send article through readability api */
         const readabilityOptions = {
             keepClasses: true, // easier manipulation later
+            charThreshold: 40
             // charThreshold: 100 // also parse short teaser text
         }
 
