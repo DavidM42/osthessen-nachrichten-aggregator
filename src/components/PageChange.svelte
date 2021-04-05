@@ -10,11 +10,11 @@
         const previousPage = Number.parseInt(currentPage) - 1;
         const firstPageAlready = previousPage < 1;
         // bit of workaround but whatever
-        return firstPageAlready ? "javascript:;" : `./${previousPage}`;
+        return firstPageAlready ? "javascript:;" : `/page/${previousPage}`;
     };
 
     const nextPage = () => {
-        return `./${Number.parseInt(currentPage) + 1}`;
+        return `/page/${Number.parseInt(currentPage) + 1}`;
     };
 </script>
 
