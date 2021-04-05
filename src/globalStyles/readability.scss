@@ -1,0 +1,34 @@
+/************ readability optimisation content styling *************/
+body {
+	font-family: -apple-system, Helvetica, "Helvetica Neue", Roboto, Arial, sans-serif;
+	/* font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif; */
+	
+	/* center readingWrapper in body */
+	display: flex;
+	justify-content: center;
+}
+
+article.readingWrapper {
+	max-width: 65vw;
+
+	/* so not to edge of scroll start or end */
+	margin-top: 10vh;
+	margin-bottom: 100px;
+
+	/* readability improves */
+	line-height: 1.4em;
+
+	/* so scrollbar doesn't spawn in and out */
+	min-height: 105vh;
+
+
+	// change read widths depending on phone or desktop
+	@media (min-width: 1024px) {
+		/* desktop pc reduce line wideness */
+		max-width: 50vw;
+	}
+	@media (max-width: 1024px) {
+		/* phones basically */
+		max-width: 90vw;
+	}
+}

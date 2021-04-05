@@ -1,0 +1,22 @@
+/***** Light mode colors *****/
+$color-light-bg: #f2eee2;
+$color-light-color: #333;
+
+$color-light-title: #ff3e00;
+$color-light-link: rgb(3, 86, 168);
+
+$color-light-btn-bg: #f76027;
+$color-light-btn-color: white;
+
+// TODO overthink if less shades of same color maybe
+// or use like darken and lighten stuff of base colors
+
+/***** Dark Mode colors ********/
+$color-dark-bg: #171c20;
+$color-dark-color: #bfc2c7;
+
+$color-dark-title: #4ca9fc;
+$color-dark-link: rgb(43, 145, 247);
+
+$color-dark-btn-bg: #0084f6;
+$color-dark-btn-color: white;

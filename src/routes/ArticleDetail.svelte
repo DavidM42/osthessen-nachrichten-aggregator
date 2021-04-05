@@ -69,44 +69,44 @@
 	{/await}
 </main>
 
-<style>
+<style lang="scss">
 	/* masonry inspiration from https://css-tricks.com/piecing-together-approaches-for-a-css-masonry-layout/ */
 	.masonry {
 		display: flex;
 		flex-wrap: wrap;
-	}
 
-	.masonry div {
-		margin: 0 1rem 1rem 0;
-	}
+		div {
+			margin: 0 1rem 1rem 0;
+		}
 
-	.articleTxtColumn {
-		max-width: 55%;
-	}
-
-	.articleImg {
-		/* background: #25313a3f; */
-		flex: 1 0 auto;
-
-		min-height: 20vh;
-		min-width: 15vw;
-
-		background-size: contain;
-		background-repeat: no-repeat;
-		/* background-position: center; */
-		background-position: top center;
-	}
-
-	/* on phones require bigger widths for text and images */
-	@media (max-width: 1024px) {
 		.articleTxtColumn {
-			/* Full width for article */
-			max-width: 100%;
+			max-width: 55%;
 		}
 
 		.articleImg {
-			min-height: 30vh;
-			min-width: 45vw;
+			/* background: #25313a3f; */
+			flex: 1 0 auto;
+
+			min-height: 20vh;
+			min-width: 15vw;
+
+			background-size: contain;
+			background-repeat: no-repeat;
+			/* background-position: center; */
+			background-position: top center;
+		}
+
+		/* on phones require bigger widths for text and images */
+		@media (max-width: 1024px) {
+			.articleTxtColumn {
+				/* Full width for article */
+				max-width: 100%;
+			}
+
+			.articleImg {
+				min-height: 30vh;
+				min-width: 45vw;
+			}
 		}
 	}
 </style>

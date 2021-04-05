@@ -58,7 +58,7 @@
 	{/await}
 </main>
 
-<style>
+<style lang="scss">
 h1.articleTitle {
 	margin-top: 50px;
 }

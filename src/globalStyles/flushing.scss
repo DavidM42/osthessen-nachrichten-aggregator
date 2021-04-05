@@ -1,0 +1,14 @@
+/*********** Basic style flushing spacing ***************/
+html, body {
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
+
+body {
+	/* some clearing rules */
+	margin: 0;
+	padding: 0;
+	/* https://developer.mozilla.org/en-US/docs/Web/CSS/box-sizing */
+	box-sizing: border-box;
+}

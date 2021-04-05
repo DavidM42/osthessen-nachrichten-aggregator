@@ -31,25 +31,23 @@
 </script>
 
 <!-- TODO reflect change in button ui -->
-<button on:click={changeOpinion} class:enabled="{isSponsorHater}" title="Block alle Sponsor Bilder">
+<button
+    class="fa-btn-interaction"
+    on:click={changeOpinion}
+    class:enabled="{isSponsorHater}"
+    title="Block alle Sponsor Bilder"
+    >
     <Fa icon={faAd} size="lg"/>
 </button>
 
-<style>
+<style lang="scss">
     button {
+        // sponsor block button get's special colors
+        // no change between light and dark mode too
         background-color: #333;
         color: white;
-        border: none;
-        border-radius: 4px;
-        padding: 0.5rem;
-        text-transform: uppercase;
 
-        /* position: sticky;
-        align-self: flex-end; */
         position: fixed;
-        z-index: 10;
-
-        width: 50px;
         right: 7px;
         top: 50px;
     }

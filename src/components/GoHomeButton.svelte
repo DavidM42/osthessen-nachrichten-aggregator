@@ -11,31 +11,14 @@
     }
 </script>
 
-<button on:click={goHome}>
+<button class="fa-btn-interaction default-color-btn" on:click={goHome}>
     <Fa icon={faStepBackward} size="lg"/>
 </button>
 
-<style>
+<style lang="scss">
     button {
-        background-color: #f76027;
-        color: white;
-        border: none;
-        border-radius: 4px;
-        padding: 0.5rem;
-        text-transform: uppercase;
-
-        /* position: sticky; */
-        /* align-self: flex-start; */
-
         position: fixed;
-        z-index: 10;
-
-        width: 50px;
         left: 7px;
         top: 10px;
-    }
-    :global(body.dark-mode) button {
-        background-color: #0084f6;
-        color: white;
     }
 </style>

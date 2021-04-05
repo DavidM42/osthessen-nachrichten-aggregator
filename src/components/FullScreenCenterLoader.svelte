@@ -17,7 +17,7 @@
     </div>
 </div>
 
-<style>
+<style lang="scss">
 #spinnerContainer {
     width: 100%;
     height: 100%;

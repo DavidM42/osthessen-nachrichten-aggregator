@@ -20,44 +20,30 @@
 
 <div id="pagerContainer">
     {@debug currentPage}
-    <a class="pageChange" href={previousPage()} >
+    <a class="pageChange default-color-btn" href={previousPage()} >
         <Fa icon={faBackward} size="lg"/>
     </a>
-    <span id="currentPage">{currentPage}</span>
-    <a class="pageChange" href={nextPage()}>
+    <span id="currentPage" class="default-color-btn">{currentPage}</span>
+    <a class="pageChange default-color-btn" href={nextPage()}>
         <Fa icon={faForward} size="lg"/>
     </a>
 </div>
 
-<style>
+<style lang="scss">
     div#pagerContainer {
         text-align: center;
         margin-top: 50px;
     }
 
     a.pageChange {
-        /* consolidate all those buttons into global styles */
-        background-color: #f76027;
-        color: white;
-        border: none;
         border-radius: 4px;
         padding: 0.5rem;
-    }
-    :global(body.dark-mode) a.pageChange {
-        background-color: #0084f6;
-        color: white;
     }
 
     /* TODO consolidate css more */
     span#currentPage {
-        background-color: #f76027;
-        color: white;
         border-radius: 4px;
         padding: 0.5rem 3rem;
         font-size: 1.5em;
-    }
-    :global(body.dark-mode) span#currentPage {
-        background-color: #0084f6;
-        color: white;
     }
 </style>

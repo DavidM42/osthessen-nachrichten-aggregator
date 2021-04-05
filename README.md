@@ -42,3 +42,7 @@ If you're building a single-page app (SPA) with multiple routes, sirv needs to b
 ```js
 "start": "sirv public --single"
 ```
+
+## SCSS
+
+This project uses SCSS according to [this tutorial](https://daveceddia.com/svelte-with-sass-in-vscode/)
