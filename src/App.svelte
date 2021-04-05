@@ -5,7 +5,7 @@
 	import Homepage from "./routes/Homepage.svelte";
 
 	// Used for SSR. A falsy value is ignored by the Router.
-	// TODO check out ssr
+	// TODO check out ssr performance
 	// export let url = "";
 </script>
 
@@ -31,7 +31,6 @@
 		<!-- <Link to="blog">Blog</Link> -->
 	</nav>
 
-	<!-- TODO better way than prefixing project name eventually or just own subdomain -->
 	<Route path="article/:encodedArticleSlug" component={ArticleDetail} />
 	<!-- <Route path="article/:articleUrl" let:params>
 		<ArticleDetail articleUrl="{params.articleUrl}" />

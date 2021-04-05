@@ -34,7 +34,6 @@
 	<DarkModeToggle />
 	<SponsorHaterToggle />
 
-	<!-- TODO more pages like page 2 and so on -->
 	{#await getHomepage()}
 		<FullScreenCenterLoader />
 	{:then homepageArticles}

@@ -7,7 +7,7 @@ export class SelectorMagic {
     private requests = new Requests();
 
     private isSponsorHater = false;
-    
+
     constructor() {
         sponsorHater.subscribe(isHater => {
             this.isSponsorHater = isHater;
@@ -21,11 +21,11 @@ export class SelectorMagic {
      */
     retrieveArticleImageLinks(doc: Document) {
         let articleNormalImagesElements = Array.from(doc.querySelectorAll('img[src^="fileadmin/user_upload/"]'));
-        
+
         // more aggresive specific query if wants to block even sponsor images for e.g. soccer games
         if (this.isSponsorHater) {
             articleNormalImagesElements = Array.from(doc.querySelectorAll('img[src^="fileadmin/user_upload/user_upload/"]'));
-        } 
+        }
 
         const articleSlideshowImageElements = Array.from(doc.querySelectorAll('img[src^="fileadmin/fotostrecken/"]'));
         const allImageElements = articleNormalImagesElements.concat(articleSlideshowImageElements);
@@ -46,7 +46,7 @@ export class SelectorMagic {
         const aTag = (doc.querySelector('a[href*="einzelansicht/news/"]') as HTMLLinkElement);
 
         if (aTag && aTag.href) {
-            const cleanedArticleSlug = aTag.href.replace(OSTHESSEN_BASE_URL,'').replace('.html','');
+            const cleanedArticleSlug = aTag.href.replace(OSTHESSEN_BASE_URL, '').replace('.html', '');
             return '/article/' + encodeURIComponent(cleanedArticleSlug);
         }
     }
@@ -125,7 +125,7 @@ export class SelectorMagic {
         const element = this.requests.htmlDocumentFragmentFromString(content);
         const allDetailsLinks = Array.from(element.querySelectorAll('a[href*="einzelansicht/news/"]'));
         allDetailsLinks.map((aTag: HTMLLinkElement) => {
-            const cleanedArticleSlug = aTag.href.replace(OSTHESSEN_BASE_URL,'').replace('.html','');
+            const cleanedArticleSlug = aTag.href.replace(OSTHESSEN_BASE_URL, '').replace('.html', '');
             aTag.href = '/article/' + encodeURIComponent(cleanedArticleSlug);
         });
         return element.querySelector('div.page').innerHTML;
@@ -154,8 +154,12 @@ export class SelectorMagic {
         const allImages = Array.from(element.querySelectorAll('img'));
         // removes all of them
         allImages.forEach((imgTag) => imgTag.parentNode.removeChild(imgTag));
-        // TODO fallback here okay to just not remove?
-        return element.querySelector('div')?.innerHTML || content;
+
+        const editedHtml = element.querySelector('div')?.innerHTML;
+        if (!editedHtml) {
+            console.warn("Could not successfully remove images from html!");
+        }
+        return editedHtml || content;
     }
 
 }

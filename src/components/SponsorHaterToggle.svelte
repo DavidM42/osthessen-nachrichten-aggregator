@@ -25,12 +25,11 @@
         localStorage.setItem(AGGRESIVE_SPONSOR_HATER_KEY, isSponsorHater + "");
         sponsorHater.update((v) => !v); // toggle
 
-        // TODO somehow have to also re render current page in this case
+        // TODO somehow have to smarter re render current page in this case
         window.location.reload();
     };
 </script>
 
-<!-- TODO reflect change in button ui -->
 <button
     class="fa-btn-interaction"
     on:click={changeOpinion}
