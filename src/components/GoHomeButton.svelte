@@ -6,8 +6,8 @@
     import { faStepBackward } from '@fortawesome/free-solid-svg-icons';
 
     function goHome() {
-        // navigate("/") // breaks gh pages
-        history.back() // native js browser reloads
+        navigate("/") // breaks gh pages
+        // history.back() // native js browser reloads
     }
 </script>
 

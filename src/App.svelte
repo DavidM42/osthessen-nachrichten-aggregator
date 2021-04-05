@@ -25,7 +25,8 @@
 	<!-- <Route path="article/:articleUrl" let:params>
 		<ArticleDetail articleUrl="{params.articleUrl}" />
 	</Route> -->
-    <Route path="" component="{Homepage}"/>
+    <Route path="/:pageString" component="{Homepage}"/>
+    <Route path="" pageString="1" component="{Homepage}"/>
 </Router>
 
 <style>

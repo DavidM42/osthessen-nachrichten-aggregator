@@ -4,18 +4,23 @@
 	import DarkModeToggle from '../components/DarkModeToggle.svelte';
 	import FullScreenCenterLoader from '../components/FullScreenCenterLoader.svelte';
 	import SponsorHaterToggle from '../components/SponsorHaterToggle.svelte';
+	import PageChange from '../components/PageChange.svelte';
 
 	import { SelectorMagic } from '../logic/SelectorMagic';
 	import { Processing } from '../logic/Processing';
 	import { Requests } from '../logic/Requests';
 
+    // has to be string not intuitive number because svelte routing gives strings
+	export let pageString: string;
 
 	const req = new Requests();
 	const processing = new Processing();
 	const selectorMagic = new SelectorMagic();
 
 	const getHomepage = async () => {
-		const homepageDom = await req.getDom('https://www.osthessen-zeitung.de/');
+		// first page if none given else further ones
+		const homepageUrl = `https://www.osthessen-zeitung.de/seite/${(Number.parseInt(pageString) || 1) + ''}.html`;
+		const homepageDom = await req.getDom(homepageUrl);
 		const articleElements = selectorMagic.getArticleSnippetsOnPage(homepageDom);
 		return processing.processHtmlElementsAsArticle(articleElements);
 	}
@@ -25,6 +30,7 @@
 	<DarkModeToggle/>
 	<SponsorHaterToggle/>
 
+	<!-- TODO more pages like page 2 and so on -->
 	{#await getHomepage()}
 		<FullScreenCenterLoader></FullScreenCenterLoader>
 	{:then homepageArticles}
@@ -47,6 +53,7 @@
 					</div>
 				{/if}
 			{/each}
+			<PageChange bind:currentPage={pageString}></PageChange>
 		</article>
 	{/await}
 </main>
