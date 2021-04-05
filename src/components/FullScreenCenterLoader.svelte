@@ -1,29 +1,30 @@
 <script lang="ts">
-	import { Stretch } from 'svelte-loading-spinners'
-    import { isCurrentlyDarkMode } from '../logic/DarkMode';
+    import { Stretch } from "svelte-loading-spinners";
+    import { isCurrentlyDarkMode } from "../logic/DarkMode";
 
     const spinnerColor = () => {
         if (isCurrentlyDarkMode()) {
-            return '#0084f6';
+            // TODO get scss vars somehow
+            return "#0084f6";
         } else {
-            return '#f76027';
+            return "#f76027";
         }
     };
 </script>
 
 <div id="spinnerContainer">
-    <div id="spinner" >
-        <Stretch size="60" color="{spinnerColor()}" unit="px"></Stretch>
+    <div id="spinner">
+        <Stretch size="60" color={spinnerColor()} unit="px" />
     </div>
 </div>
 
 <style lang="scss">
-#spinnerContainer {
-    width: 100%;
-    height: 100%;
+    #spinnerContainer {
+        width: 100%;
+        height: 100%;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 </style>

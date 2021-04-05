@@ -42,7 +42,7 @@
 <main>
 	<GoHomeButton />
 	<DarkModeToggle />
-	<SponsorHaterToggle/>
+	<SponsorHaterToggle />
 
 	{#await getArticlePage()}
 		<FullScreenCenterLoader />
@@ -54,8 +54,10 @@
 			<div class="masonry">
 				<div class="articleTxtColumn">
 					<p>{@html article.content}</p>
-					<a class="moreInfo" href={articleUrlFromslug()} target="_blank"
-						>Original auf www.osthessen-zeitung.de</a
+					<a
+						class="moreInfo"
+						href={articleUrlFromslug()}
+						target="_blank">Original auf www.osthessen-zeitung.de</a
 					>
 				</div>
 				{#each article.imageUrls as url}

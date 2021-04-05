@@ -24,7 +24,7 @@ export class Processing {
         // IMPORTANT to deep clone document here because it modifies doc drastically
         const docCopyForReadability = doc.cloneNode(true) as Document;
         const readArticle = new Readability(docCopyForReadability, readabilityOptions).parse();
-    
+
         const cleanedArticle = {
             // For these to work it's important to deep clone the doc given into Readability
             // drastically modifies doc in there while parsing

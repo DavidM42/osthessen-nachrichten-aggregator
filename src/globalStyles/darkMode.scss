@@ -1,42 +1,42 @@
 /************** dark mode switch body ****************/
 body {
-	/* for switching bg dark light mode */
-	transition: background-color 0.3s;
+    /* for switching bg dark light mode */
+    transition: background-color 0.3s;
 
-	&.light-mode {
-		/* light mode default */
-		background-color: $color-light-bg;
-		color: $color-light-color;
-	
-		h1 {
-			color: $color-light-title;
-		}
-	
-		a {
-			color: $color-light-link;
-		}
+    &.light-mode {
+        /* light mode default */
+        background-color: $color-light-bg;
+        color: $color-light-color;
 
-		.default-color-btn {
-			background-color: $color-light-btn-bg;
-			color: $color-light-btn-color;
-		}
-	}
+        h1 {
+            color: $color-light-title;
+        }
 
-	&.dark-mode {
-		background-color: $color-dark-bg;
-		color: $color-dark-color;
-	
-		h1 {
-			color: $color-dark-title;
-		}
-	
-		a {
-			color: $color-dark-link;
-		}
+        a {
+            color: $color-light-link;
+        }
 
-		.default-color-btn {
-			background-color: $color-dark-btn-bg;
-			color: $color-dark-btn-color;
-		}
-	}
+        .default-color-btn {
+            background-color: $color-light-btn-bg;
+            color: $color-light-btn-color;
+        }
+    }
+
+    &.dark-mode {
+        background-color: $color-dark-bg;
+        color: $color-dark-color;
+
+        h1 {
+            color: $color-dark-title;
+        }
+
+        a {
+            color: $color-dark-link;
+        }
+
+        .default-color-btn {
+            background-color: $color-dark-btn-bg;
+            color: $color-dark-btn-color;
+        }
+    }
 }

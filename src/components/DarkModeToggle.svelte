@@ -1,12 +1,12 @@
 <script lang="ts">
-    import { onMount } from 'svelte';
+    import { onMount } from "svelte";
 
     // for icon use https://cweili.github.io/svelte-fa/
-    import Fa from 'svelte-fa';
-    import { faAdjust } from '@fortawesome/free-solid-svg-icons';
-    
-    import { DARK_MODE_STORAGE_KEY } from '../constants';
-    import { isCurrentlyDarkMode } from '../logic/DarkMode';
+    import Fa from "svelte-fa";
+    import { faAdjust } from "@fortawesome/free-solid-svg-icons";
+
+    import { DARK_MODE_STORAGE_KEY } from "../constants";
+    import { isCurrentlyDarkMode } from "../logic/DarkMode";
 
     let isDarkMode = false;
 
@@ -19,7 +19,7 @@
         // initialize at loading;
         // if not exists is null which is also falsey
         const storedValue = localStorage.getItem(DARK_MODE_STORAGE_KEY);
-        isDarkMode = !!storedValue && storedValue === 'true';
+        isDarkMode = !!storedValue && storedValue === "true";
 
         if (isDarkMode && !isCurrentlyDarkMode()) {
             // default class is light so toggle to wanted dark mode
@@ -32,15 +32,15 @@
     const changeMode = () => {
         // reverse value and save to localStorage
         isDarkMode = !isDarkMode;
-        localStorage.setItem(DARK_MODE_STORAGE_KEY, isDarkMode + '');
+        localStorage.setItem(DARK_MODE_STORAGE_KEY, isDarkMode + "");
 
         // and set styles
         toggleClasses();
-    }
+    };
 </script>
 
 <button class="fa-btn-interaction default-color-btn" on:click={changeMode}>
-    <Fa icon={faAdjust} size="lg"/>
+    <Fa icon={faAdjust} size="lg" />
 </button>
 
 <style lang="scss">
