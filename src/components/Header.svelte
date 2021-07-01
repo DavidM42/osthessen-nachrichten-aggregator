@@ -5,7 +5,7 @@
 	<div class="container">
 		<div id="logoContainer">
 			<a href="/">
-				<img src="icons/logo.svg" alt="Osthessen Nachrichten Aggregator" />
+				<img src="/icons/logo.svg" alt="Osthessen Nachrichten Aggregator" />
 			</a>
 		</div>
 		<h1>Osthessen Nachrichten Aggregator</h1>
