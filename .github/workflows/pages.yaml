@@ -1,9 +1,9 @@
-name: Svelte build & gh-Pages deploy
+name: UNUSED Svelte build & gh-Pages deploy
 
-on:
-  push:
-    branches:
-      - master
+# on:
+#   push:
+#     branches:
+#       - master
 
 jobs:
   build:

@@ -1,5 +1,6 @@
-# svelte-osthessen-zeitung
-10x better UX for osthessen zeitung context. Mainly learning project for svelte, cors and readability
+# Osthessen Nachrichten Aggregator (ONA)
+
+10x better UX for osthessen zeitung content. Mainly learning project for svelte, cors and readability
 
 
 ## Get started
