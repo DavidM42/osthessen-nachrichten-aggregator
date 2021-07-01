@@ -10,8 +10,7 @@ const FILES_TO_CACHE = [
     '/offline.html',
     '/favicon.ico',
     '/favicon.png',
-    '/site.webmanifest',
-    '/build/bundle.css',
+    '/site.webmanifest'
 ];
 
 self.addEventListener('install', (evt) => {
