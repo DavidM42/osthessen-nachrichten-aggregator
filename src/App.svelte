@@ -25,11 +25,11 @@
 <!-- TODO eslint and typical rules like '' not "" -->
 <Router>
 	<!-- url="{url}" -->
-	<nav>
+	<!-- <nav> -->
 		<!-- <Link to="/">Homepage</Link> -->
 		<!-- <Link to="about">About</Link> -->
 		<!-- <Link to="blog">Blog</Link> -->
-	</nav>
+	<!-- </nav> -->
 
 	<Route path="article/:encodedArticleSlug" component={ArticleDetail} />
 	<!-- <Route path="article/:articleUrl" let:params>

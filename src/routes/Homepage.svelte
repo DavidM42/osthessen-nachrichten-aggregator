@@ -5,6 +5,7 @@
 	import FullScreenCenterLoader from "../components/FullScreenCenterLoader.svelte";
 	import SponsorHaterToggle from "../components/SponsorHaterToggle.svelte";
 	import PageChange from "../components/PageChange.svelte";
+	import Header from "../components/Header.svelte";
 
 	import { SelectorMagic } from "../logic/SelectorMagic";
 	import { Processing } from "../logic/Processing";
@@ -31,6 +32,7 @@
 </script>
 
 <main id="homepage">
+	<Header/>
 	<DarkModeToggle />
 	<SponsorHaterToggle />
 
@@ -68,7 +70,7 @@
 
 <style lang="scss">
 	h1.articleTitle {
-		margin-top: 50px;
+		margin-top: 25px;
 	}
 
 	.detailRow {
