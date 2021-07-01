@@ -1,6 +1,7 @@
 {
     "name": "Osthessen Nachricten Aggregator",
     "short_name": "ONA",
+    "description": "Nachrichten aus Osthessen gesammelt und schön aufbereitet.",
     "icons": [
         {
             "src": "android-chrome-192x192.png",
@@ -15,5 +16,6 @@
     ],
     "theme_color": "#ff3e00",
     "background_color": "#f2eee2",
-    "display": "standalone"
+    "display": "standalone",
+    "start_url": "/"
 }
