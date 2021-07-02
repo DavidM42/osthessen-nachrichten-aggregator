@@ -4,37 +4,45 @@
 	import FullScreenCenterLoader from "../components/FullScreenCenterLoader.svelte";
 	import SponsorHaterToggle from "../components/SponsorHaterToggle.svelte";
 
-	import { SelectorMagic } from "../logic/SelectorMagic";
-	import { Processing } from "../logic/Processing";
-	import { Requests } from "../logic/Requests";
+	import { IntegrationOsthessenNews } from "../logic/Integrations/IntegrationOsthessenNews";
+	import { IntegrationOsthessenZeitung } from "../logic/Integrations/IntegrationOsthessenZeitung";
+	import type { BaseIntegration } from "../logic/Integrations/BaseIntegration";
 
-	import { OSTHESSEN_BASE_URL } from "../constants";
-
-	const req = new Requests();
-	const processing = new Processing();
-	const selectorMagic = new SelectorMagic();
+	let currentIntegration: BaseIntegration;
+	const oNewsI = new IntegrationOsthessenNews();
+	const oZeitungI = new IntegrationOsthessenZeitung();
 
 	export let encodedArticleSlug: string;
-
-	const articleUrlFromslug = () => {
-		return (
-			OSTHESSEN_BASE_URL +
-			decodeURIComponent(encodedArticleSlug) +
-			".html"
-		);
-	};
+	let articleUrl: string;
 
 	const getArticlePage = async () => {
-		const articlePageDom = await req.getDom(articleUrlFromslug());
+		const decodedSlug = decodeURIComponent(encodedArticleSlug);
+		// TODO these checks really safe way or better extra param in url
+		const isOsthessenZeitungSlug = decodedSlug.startsWith('einzelansicht');
+		// match with regex of n then 8 digits like
+		// /n11648422/wir-spielen-wieder-die-70-bad-hersfelder-festspiele-sind-eroeffnet
+		debugger;
+		const isOsthessenNewsSlug = new RegExp('n\\d{8}\/').test(decodedSlug);
 
-		const articleElement = selectorMagic.getSingularBigArticleOnPage(
+		if (isOsthessenZeitungSlug) {
+			currentIntegration = oZeitungI;
+		} else if(isOsthessenNewsSlug) {
+			currentIntegration = oNewsI;
+		} else {
+			throw new Error('Unknown detail page url slug!');
+		}
+
+		articleUrl = currentIntegration.articleUrlFromslug(encodedArticleSlug);
+		const articlePageDom = await currentIntegration.requests.getDom(articleUrl);
+
+		const articleElement = currentIntegration.selectorMagic.getSingularBigArticleOnPage(
 			articlePageDom
 		);
-		let article = processing.processHtmlElementsAsArticle([
+		let article = currentIntegration.processing.processHtmlElementsAsArticle([
 			articleElement,
 		])[0];
 
-		article = processing.processArticle(articlePageDom);
+		article = currentIntegration.processing.processArticle(articlePageDom);
 		return article;
 	};
 </script>
@@ -56,8 +64,8 @@
 					<p>{@html article.content}</p>
 					<a
 						class="moreInfo"
-						href={articleUrlFromslug()}
-						target="_blank">Original auf www.osthessen-zeitung.de</a
+						href={articleUrl}
+						target="_blank">Original auf {currentIntegration.HOST}</a
 					>
 				</div>
 				{#each article.imageUrls as url}

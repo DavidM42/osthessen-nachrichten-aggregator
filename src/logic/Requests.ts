@@ -1,8 +1,15 @@
-import { OSTHESEN_HOST, OSTHESSEN_BASE_URL, PROXY_BASE_URL } from "../constants";
+import { PROXY_BASE_URL } from "../constants";
 
 const domParser = new DOMParser();
 
 export class Requests {
+
+    private baseUrl: string;
+
+    constructor (baseUrl: string) {
+        this.baseUrl = baseUrl;
+    }
+
     public async getDom(url: string) {
         return this.htmlToDocument(await (await fetch(PROXY_BASE_URL + url)).text());
     }
@@ -13,7 +20,7 @@ export class Requests {
 
         // appending this is important so links work later
         let baseHeaderElement = doc.createElement('base');
-        baseHeaderElement.setAttribute('href', OSTHESSEN_BASE_URL);
+        baseHeaderElement.setAttribute('href', this.baseUrl);
         doc.head.append(baseHeaderElement);
         return doc;
     }

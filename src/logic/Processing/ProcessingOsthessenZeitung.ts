@@ -1,17 +1,20 @@
 import { Readability } from "@mozilla/readability";
 import DOMPurify from "dompurify";
-// const DOMPurify = require('dompurify');
 
-import type { ArticleType } from "../types/article";
-import { Requests } from "./Requests";
+import type { ArticleType } from "../../types/article";
+import type { Requests } from "../Requests";
 
-import { SelectorMagic } from "./SelectorMagic";
+import { SelectorMagicOsthessenZeitung } from "../Selectors/SelectorMagicOsthessenZeitung";
+import { BaseProcessing } from "./BaseProcessing";
 
-export class Processing {
+export class ProcessingOsthessenZeitung extends BaseProcessing {
 
-    private selectorMagic = new SelectorMagic();
-    private requests = new Requests();
+    private selectorMagic: SelectorMagicOsthessenZeitung
 
+    constructor(requests: Requests) {
+        super(requests);
+        this.selectorMagic = new SelectorMagicOsthessenZeitung(requests);
+    }
 
     processArticle(doc: Document): ArticleType {
         /* Send article through readability api */
@@ -57,11 +60,3 @@ export class Processing {
     }
 
 }
-
-
-
-
-// const getAllArticlesOnPage = (url: string) => {
-//     // .querySelectorAll('a[href^="einzelansicht/news/"]')
-// }
-

@@ -12,6 +12,7 @@
     };
 </script>
 
+<!-- TODO timeout for this boy so you know it's broken at some point -->
 <div id="spinnerContainer">
     <div id="spinner">
         <Stretch size="60" color={spinnerColor()} unit="px" />

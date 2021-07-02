@@ -1,14 +1,14 @@
-import { PROXY_BASE_URL, OSTHESEN_HOST, OSTHESSEN_BASE_URL } from "../constants";
-import { sponsorHater } from "../stores";
-import { Requests } from "./Requests";
+import { PROXY_BASE_URL, OSTHESSEN_ZEITUNG_BASE_URL } from "../../constants";
+import { sponsorHater } from "../../stores";
+import type { Requests } from "../Requests";
+import { BaseSelectorMagic } from "./BaseSelectorMagic";
 
-export class SelectorMagic {
-
-    private requests = new Requests();
+export class SelectorMagicOsthessenZeitung extends BaseSelectorMagic {
 
     private isSponsorHater = false;
 
-    constructor() {
+    constructor(requests: Requests) {
+        super(requests);
         sponsorHater.subscribe(isHater => {
             this.isSponsorHater = isHater;
         });
@@ -46,7 +46,7 @@ export class SelectorMagic {
         const aTag = (doc.querySelector('a[href*="einzelansicht/news/"]') as HTMLLinkElement);
 
         if (aTag && aTag.href) {
-            const cleanedArticleSlug = aTag.href.replace(OSTHESSEN_BASE_URL, '').replace('.html', '');
+            const cleanedArticleSlug = aTag.href.replace(OSTHESSEN_ZEITUNG_BASE_URL, '').replace('.html', '');
             return '/article/' + encodeURIComponent(cleanedArticleSlug);
         }
     }
@@ -89,6 +89,28 @@ export class SelectorMagic {
     }
 
     /**
+     * Returns cleaned article element list from osthessen news
+     * @param doc Document of page
+     * @returns Singular div.article element
+     */
+    getOsthesssenNewsArticleSnippetsOnPage(doc: Document): Element[] {
+        const rawArticelElements = Array.from(doc.querySelectorAll('article'));
+        rawArticelElements.map((element) => {
+            // nothing to change here maybe
+
+            // TODO store this data somewhere else and make clickable instead of just removing
+            const kicker = element.getElementsByClassName('kicker');
+            if (kicker.length > 0) {
+                while (kicker.length > 0) {
+                    kicker[0].parentNode.removeChild(kicker[0]);
+                }
+            }
+
+        })
+        return rawArticelElements;
+    }
+
+    /**
      * Returns cleaned big article element from einzelansicht page
      * @param doc Document of page
      * @returns Singular div.article element without banner ads hopefully
@@ -125,7 +147,7 @@ export class SelectorMagic {
         const element = this.requests.htmlDocumentFragmentFromString(content);
         const allDetailsLinks = Array.from(element.querySelectorAll('a[href*="einzelansicht/news/"]'));
         allDetailsLinks.map((aTag: HTMLLinkElement) => {
-            const cleanedArticleSlug = aTag.href.replace(OSTHESSEN_BASE_URL, '').replace('.html', '');
+            const cleanedArticleSlug = aTag.href.replace(OSTHESSEN_ZEITUNG_BASE_URL, '').replace('.html', '');
             aTag.href = '/article/' + encodeURIComponent(cleanedArticleSlug);
         });
         return element.querySelector('div.page').innerHTML;
@@ -143,23 +165,4 @@ export class SelectorMagic {
         allDetailsLinks.forEach((aTag) => aTag.parentNode.removeChild(aTag));
         return element.querySelector('div').innerHTML;
     }
-
-    /**
-     * Pipe html in pipe html out of page where all images get removed.
-     * @param content Html content of returned page
-     * @returns Html content of page without any images
-     */
-    removeImages(content: string): string {
-        const element = this.requests.htmlDocumentFragmentFromString(content);
-        const allImages = Array.from(element.querySelectorAll('img'));
-        // removes all of them
-        allImages.forEach((imgTag) => imgTag.parentNode.removeChild(imgTag));
-
-        const editedHtml = element.querySelector('div')?.innerHTML;
-        if (!editedHtml) {
-            console.warn("Could not successfully remove images from html!");
-        }
-        return editedHtml || content;
-    }
-
 }
