@@ -3,6 +3,7 @@
 	import DarkModeToggle from "../components/DarkModeToggle.svelte";
 	import FullScreenCenterLoader from "../components/FullScreenCenterLoader.svelte";
 	import SponsorHaterToggle from "../components/SponsorHaterToggle.svelte";
+	import ShareButton from "../components/ShareButton.svelte";
 
 	import { IntegrationOsthessenNews } from "../logic/Integrations/IntegrationOsthessenNews";
 	import { IntegrationOsthessenZeitung } from "../logic/Integrations/IntegrationOsthessenZeitung";
@@ -51,6 +52,7 @@
 	<GoHomeButton />
 	<DarkModeToggle />
 	<SponsorHaterToggle />
+	<ShareButton title="" text="Hey schau dir diesen Artikel an " url="{window.location.href}"/>
 
 	{#await getArticlePage()}
 		<FullScreenCenterLoader />
