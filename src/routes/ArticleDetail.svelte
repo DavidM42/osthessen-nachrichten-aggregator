@@ -8,6 +8,7 @@
 	import { IntegrationOsthessenNews } from "../logic/Integrations/IntegrationOsthessenNews";
 	import { IntegrationOsthessenZeitung } from "../logic/Integrations/IntegrationOsthessenZeitung";
 	import type { BaseIntegration } from "../logic/Integrations/BaseIntegration";
+import type { ArticleType } from "../types/article";
 
 	let currentIntegration: BaseIntegration;
 	const oNewsI = new IntegrationOsthessenNews();
@@ -16,13 +17,16 @@
 	export let encodedArticleSlug: string;
 	let articleUrl: string;
 
+	// filled by content await then call to getArticlePage()
+	// then used by svelte head too
+	let article: ArticleType;
+
 	const getArticlePage = async () => {
 		const decodedSlug = decodeURIComponent(encodedArticleSlug);
 		// TODO these checks really safe way or better extra param in url
 		const isOsthessenZeitungSlug = decodedSlug.startsWith('einzelansicht');
 		// match with regex of n then 8 digits like
 		// /n11648422/wir-spielen-wieder-die-70-bad-hersfelder-festspiele-sind-eroeffnet
-		debugger;
 		const isOsthessenNewsSlug = new RegExp('n\\d{8}\/').test(decodedSlug);
 
 		if (isOsthessenZeitungSlug) {
@@ -39,7 +43,7 @@
 		const articleElement = currentIntegration.selectorMagic.getSingularBigArticleOnPage(
 			articlePageDom
 		);
-		let article = currentIntegration.processing.processHtmlElementsAsArticle([
+		article = currentIntegration.processing.processHtmlElementsAsArticle([
 			articleElement,
 		])[0];
 
@@ -47,6 +51,14 @@
 		return article;
 	};
 </script>
+
+<svelte:head>
+	{#if article}
+		<title>ONA - {article.title}</title>
+		<meta property="og:image" content="{article.imageUrls[0]}">
+		<meta name="description" content="{ (article.excerpt || article.textContent.substring(0, 150)) }"/>
+	{/if}
+</svelte:head>
 
 <main>
 	<GoHomeButton />

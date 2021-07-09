@@ -9,7 +9,7 @@
 
 	import { IntegrationOsthessenNews } from "../logic/Integrations/IntegrationOsthessenNews";
 	import { IntegrationOsthessenZeitung } from "../logic/Integrations/IntegrationOsthessenZeitung";
-import { mergeTwoArraysSwitching } from "../logic/arrayMixerHelper";
+	import { mergeTwoArraysSwitching } from "../logic/arrayMixerHelper";
 
 	// has to be string not intuitive number because svelte routing gives strings
 	export let pageString: string;
@@ -29,6 +29,16 @@ import { mergeTwoArraysSwitching } from "../logic/arrayMixerHelper";
 		return articleDetails;
 	};
 </script>
+
+<svelte:head>
+	<title>ONA - Osthessen Nachrichten Aggregator</title>
+	<meta name="description" content="Nachrichten aus Osthessen gesammelt und schön aufbereitet"/>
+	
+	<meta property="og:image" content="/icons/android-chrome-512x512.png">
+	<meta property="og:image:type" content="image/png">
+	<meta property="og:image:width" content="512">
+	<meta property="og:image:height" content="512">
+</svelte:head>
 
 <main id="homepage">
 	<Header/>
