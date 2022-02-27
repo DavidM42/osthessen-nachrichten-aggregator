@@ -18,11 +18,12 @@ a {
     }
 }
 
-button.fa-btn-interaction {
+a.fa-btn-interaction,button.fa-btn-interaction {
     // colors in darkMode.scss
     border: none;
     border-radius: 4px;
     padding: 0.5rem;
+    cursor: pointer;
 
     z-index: 10;
     width: 50px;
