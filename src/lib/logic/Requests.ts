@@ -1,6 +1,8 @@
 import { browser } from '$app/env';
 
 import parseDom from 'dom-parse';
+// import { HappyDOMContext } from '@happy-dom/server-rendering';
+// import { Script } from 'vm';
 
 export class Requests {
 
@@ -23,12 +25,13 @@ export class Requests {
     public htmlToDocument(html: string) {
         // see https://developer.mozilla.org/en-US/docs/Web/API/DOMParser
         const doc: Document = parseDom(html);
+        // let doc: Document;
         // if (browser) {
         //     const domParser = new DOMParser();
         //     doc = domParser.parseFromString(html, "text/html");
         // } else {
-        //     const { JSDOM } = await import('jsdom');
-        //     doc = new jsdom.JSDOM(html).window.document;
+        //     // const { JSDOM } = await import('jsdom');
+        //     // doc = new jsdom.JSDOM(html).window.document;
         // }
 
         // appending this is important so links work later
