@@ -2,35 +2,25 @@
 
 10x better UX for osthessen zeitung content. Mainly learning project for svelte/svelteKit, cors and readability
 
+## Developing
 
-## Get started
+Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
 
-Install the dependencies...
-
-```bash
-npm install
-```
-
-...then start [Rollup](https://rollupjs.org):
-
-```bash
+```sh
 npm run dev
+
+# or start the server and open the app in a new browser tab
+npm run dev -- --open
 ```
 
-Navigate to [localhost:3000](http://localhost:3000). You should see your app running. Edit a component file in `src`, save it, and reload the page to see your changes.
+## Building
 
-By default, the server will only respond to requests from localhost. To allow connections from other computers, edit the `sirv` commands in package.json to include the option `--host 0.0.0.0`.
+To create a production version of your app:
 
-If you're using [Visual Studio Code](https://code.visualstudio.com/) we recommend installing the official extension [Svelte for VS Code](https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode). If you are using other editors you may need to install a plugin in order to get syntax highlighting and intellisense.
-
-## Building and running in production mode
-
-To create an optimised version of the app:
-
-```bash
+```sh
 npm run build
 ```
 
-## SCSS
+You can preview the production build with `npm run preview`.
 
-This project uses SCSS according to [this tutorial](https://daveceddia.com/svelte-with-sass-in-vscode/)
+> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
