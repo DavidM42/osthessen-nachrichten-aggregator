@@ -103,7 +103,7 @@
 			position: absolute;
 			top: 50%;
 			transform: translateY(-50%);
-			background: rgba(0, 0, 0, 0.5);
+			background: transparent;
 			border: none;
 			color: #fff;
 			font-size: 2.5rem;
