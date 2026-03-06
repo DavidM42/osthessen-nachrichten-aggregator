@@ -18,6 +18,7 @@
     "theme_color": "#ff3e00",
     "background_color": "#f2eee2",
     "display": "standalone",
+    "scope": "/",
     "start_url": "/all/page/1",
     "share_target": {
       "action": "/share-target",
