@@ -3,6 +3,7 @@
 
 	let showImageViewer = $state(false);
 	let currentImageIndex = $state(0);
+	let downloadLink: HTMLAnchorElement | null = $state(null);
 
 	// Expose open(idx) for parent control
 	export function open(idx: number) {
@@ -12,10 +13,12 @@
 	function close() {
 		showImageViewer = false;
 	}
-	function prev() {
+	function prev(event: Event) {
+		event.stopPropagation(); // Prevent the click from bubbling up to the overlay (which would close the viewer)
 		currentImageIndex = (currentImageIndex - 1 + imageUrls.length) % imageUrls.length;
 	}
-	function next() {
+	function next(event: Event) {
+		event.stopPropagation();
 		currentImageIndex = (currentImageIndex + 1) % imageUrls.length;
 	}
 	function getDownloadHref() {
@@ -34,16 +37,11 @@
 		if (e.key === 'Escape') {
 			close();
 		} else if (e.key === 'ArrowLeft') {
-			prev();
+			prev(e);
 		} else if (e.key === 'ArrowRight') {
-			next();
+			next(e);
 		} else if (e.key === 'Enter') {
-			const a = document.createElement('a');
-			a.href = getDownloadHref();
-			a.download = getDownloadFileName();
-			document.body.appendChild(a);
-			a.click();
-			document.body.removeChild(a);
+			downloadLink?.click();
 		}
 	}
 
@@ -55,9 +53,8 @@
 	});
 </script>
 
-/* eslint-disable svelte/no-navigation-without-resolve */
 {#if showImageViewer}
-	<div class="imageViewerOverlay">
+	<div class="imageViewerOverlay" onclick={close}>
 		<button class="closeBtn" onclick={close} aria-label="Close">✕</button>
 		<button class="navBtn left" onclick={prev} aria-label="Previous">◀</button>
 		<img
@@ -67,9 +64,13 @@
 		/>
 		<button class="navBtn right" onclick={next} aria-label="Next">▶</button>
 		<a
+			bind:this={downloadLink}
 			class="downloadBtn"
 			download={getDownloadFileName()}
+			// eslint-disable-next-line svelte/no-navigation-without-resolve
 			href={getDownloadHref()}
+			onclick={(e) => e.stopPropagation()}
+			// Prevent the click from bubbling up to the overlay (which would close the viewer)
 			aria-label="Download">⬇️ Download</a
 		>
 	</div>
