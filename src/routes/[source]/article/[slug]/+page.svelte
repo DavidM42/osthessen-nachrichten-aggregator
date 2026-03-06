@@ -52,7 +52,7 @@
 		<div class="masonry">
 			<div class="articleTxtColumn">
 				<p>{@html data.article.content}</p>
-				<a class="moreInfo" href={data.articleUrl} target="_blank"
+				<a class="moreInfo" href={data.articleUrl} target="_blank" rel="external"
 					>Original auf {data.currentIntegration.HOST}</a
 				>
 			</div>

@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { resolve } from '$app/paths';
+
 	let { imageUrls, currentIntegration } = $props();
 
 	let showImageViewer = $state(false);
@@ -24,7 +26,7 @@
 	function getDownloadHref() {
 		const currentImageUrl = imageUrls[currentImageIndex];
 		const nonThumbnailLink = currentIntegration.getOriginalImageOfThumbnail(currentImageUrl);
-		return `/content/${encodeURIComponent(nonThumbnailLink)}`;
+		return encodeURIComponent(nonThumbnailLink);
 	}
 	function getDownloadFileName() {
 		const currentImageUrl = imageUrls[currentImageIndex];
@@ -67,8 +69,7 @@
 			bind:this={downloadLink}
 			class="downloadBtn"
 			download={getDownloadFileName()}
-			// eslint-disable-next-line svelte/no-navigation-without-resolve
-			href={getDownloadHref()}
+			href={resolve('/content/[url]', { url: getDownloadHref() })}
 			onclick={(e) => e.stopPropagation()}
 			// Prevent the click from bubbling up to the overlay (which would close the viewer)
 			aria-label="Download">⬇️ Download</a
