@@ -1,7 +1,6 @@
 import { OSTHESEN_NEWS_HOST, OSTHESEN_ZEITUNG_HOST } from '$lib/constants';
 import { Integrations } from '$lib/types/integrations';
-import { redirect } from '@sveltejs/kit';
-import { error } from 'console';
+import { error, redirect } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
 
 export const load: PageLoad = ({ url }) => {
