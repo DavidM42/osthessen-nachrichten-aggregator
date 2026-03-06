@@ -1,37 +1,35 @@
 import { OSTHESEN_NEWS_HOST, OSTHESEN_ZEITUNG_HOST } from '$lib/constants';
 import { Integrations } from '$lib/types/integrations';
 import { error, redirect } from '@sveltejs/kit';
+import { SvelteURL } from 'svelte/reactivity';
 import type { PageLoad } from './$types';
 
 export const load: PageLoad = ({ url }) => {
-	const sharedTitle = url.searchParams.get('title');
 	const sharedText = url.searchParams.get('text');
-	const sharedUrl = url.searchParams.get('url');
-	console.log('Received shared data:', { sharedTitle, sharedText, sharedUrl });
+	// const sharedTitle = url.searchParams.get('title');
+	// const sharedUrl = url.searchParams.get('url');
+	// console.log('Received shared data:', { sharedTitle, sharedText, sharedUrl });
 
-	let urlToResolve = sharedText;
-
-	if (sharedUrl) {
-		urlToResolve = sharedUrl;
+	if (!sharedText) {
+		error(400, 'Kein geteilter Text gefunden!');
 	}
 
-	if (urlToResolve) {
-		if (urlToResolve.includes(OSTHESEN_ZEITUNG_HOST)) {
-			const cleanedArticleSlug = urlToResolve
-				.replace(OSTHESEN_ZEITUNG_HOST, '')
-				.replace('.html', '');
-			console.log('Cleaned article slug:', cleanedArticleSlug);
-			const articleUrl = `/${Integrations.OSTHESSEN_ZEITUNG}/article/${encodeURIComponent(cleanedArticleSlug)}`;
-			console.log(articleUrl);
-			redirect(302, articleUrl);
-		} else if (urlToResolve.includes(OSTHESEN_NEWS_HOST)) {
-			const cleanedArticleSlug = urlToResolve.replace(OSTHESEN_NEWS_HOST, '').replace('.html', '');
-			console.log('Cleaned article slug:', cleanedArticleSlug);
-			const articleUrl = `/${Integrations.OSTHESEN_NEWS}/article/${encodeURIComponent(cleanedArticleSlug)}`;
-			console.log(articleUrl);
-			redirect(302, articleUrl);
-		}
-	} else {
-		error(400, 'Keine valide URL von Osthessen-News oder Osthessen-Zeitung gefunden!');
+	const sharedArticleUrl = sharedText;
+	const pathForSlug = new SvelteURL(sharedArticleUrl).pathname.replace('.html', '');
+
+	// in testing url was alway in text field
+	// if (sharedUrl) {
+	// 	urlToResolve = sharedUrl;
+	// }
+
+	if (sharedArticleUrl.includes(OSTHESEN_ZEITUNG_HOST)) {
+		const articleUrl = `/${Integrations.OSTHESSEN_ZEITUNG}/article/${encodeURIComponent(pathForSlug)}`;
+		console.log(articleUrl);
+		redirect(302, articleUrl);
+	} else if (sharedArticleUrl.includes(OSTHESEN_NEWS_HOST)) {
+		const articleUrl = `/${Integrations.OSTHESEN_NEWS}/article/${encodeURIComponent(pathForSlug)}`;
+		console.log(articleUrl);
+		redirect(302, articleUrl);
 	}
+	error(400, 'Keine valide URL von Osthessen-News oder Osthessen-Zeitung gefunden!');
 };
