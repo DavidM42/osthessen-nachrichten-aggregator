@@ -1,7 +1,15 @@
 <script lang="ts">
+	import { afterNavigate, beforeNavigate } from '$app/navigation';
 	import favicon from '$lib/assets/favicon.svg';
+	import FullScreenCenterLoader from '$lib/components/FullScreenCenterLoader.svelte';
 
 	let { children } = $props();
+
+	let loading = $state(false);
+
+	beforeNavigate(() => (loading = true));
+
+	afterNavigate(() => (loading = false));
 </script>
 
 <svelte:head>
@@ -16,5 +24,9 @@
 		@use '$lib/globalStyles/customGlobal.scss'; // custom global definitions
 	</style>
 </svelte:head>
+
+{#if loading}
+	<FullScreenCenterLoader />
+{/if}
 
 {@render children()}
