@@ -36,7 +36,11 @@ export class SelectorMagicOsthessenZeitung extends BaseSelectorMagic {
 		);
 		const allImageElements = articleNormalImagesElements.concat(articleSlideshowImageElements);
 
-		return allImageElements.map((element) => (element as HTMLImageElement).src);
+		// map to image source and filter out duplicates
+		const noDuplicateImageSources = Array.from(
+			new Set(allImageElements.map((element) => (element as HTMLImageElement).src))
+		);
+		return noDuplicateImageSources;
 		// code to proxy images but not needed. Allows cors apparently
 		// return allImageElements.map((element: HTMLImageElement) => {
 		// 	// remap url to proxy

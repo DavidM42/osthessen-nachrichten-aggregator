@@ -31,9 +31,13 @@ export class SelectorMagicOsthessenNews extends BaseSelectorMagic {
 				!imageElementSrc.includes('/static/')
 			);
 		});
+		// map to image source and filter out duplicates
+		const noDuplicateImageSources = Array.from(
+			new Set(filteredImageElements.map((element) => (element as HTMLImageElement).src))
+		);
 
 		// map only image source
-		return filteredImageElements.map((element) => (element as HTMLImageElement).src);
+		return noDuplicateImageSources;
 	}
 
 	/**

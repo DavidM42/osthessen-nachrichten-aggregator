@@ -104,7 +104,7 @@
 			position: absolute;
 			top: 50%;
 			transform: translateY(-50%);
-			background: transparent;
+			background: none;
 			border: none;
 			color: #fff;
 			font-size: 2.5rem;
@@ -128,10 +128,11 @@
 
 		.downloadBtn {
 			position: absolute;
+			width: 120px;
 			bottom: 32px;
 			left: 50%;
 			transform: translateX(-50%);
-			background: rgba(0, 0, 0, 0.7);
+			background: none;
 			color: #fff;
 			border: none;
 			padding: 0.75em 2em;
