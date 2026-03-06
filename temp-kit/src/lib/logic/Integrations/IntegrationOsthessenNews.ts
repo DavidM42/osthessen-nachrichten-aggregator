@@ -33,6 +33,14 @@ export class IntegrationOsthessenNews extends BaseIntegration {
 		return currentDom;
 	}
 
+	/**
+	 * In some articles with image gallerys delivers smaller thumbnails.
+	 * Original image path can easily be retrieved by removing ?class=thumbnail from thumbnail url
+	 */
+	public getOriginalImageOfThumbnail(thumbnailImgUrl: string): string {
+		return thumbnailImgUrl.replace('?class=thumbnail', '');
+	}
+
 	public async getArticleElements(pageNumber: number) {
 		let dom;
 		if (pageNumber == 0) {

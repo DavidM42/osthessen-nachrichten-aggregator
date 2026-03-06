@@ -30,6 +30,12 @@ export abstract class BaseIntegration {
 	}
 
 	/**
+	 * Get original image from thumbnail. Input url to thumbnail image and get back url to original image.
+	 * Currently only needed for osthessen news as osthessen zeitung already has original images in article snippets.
+	 */
+	public abstract getOriginalImageOfThumbnail(thumbnailImgUrl: string): string;
+
+	/**
 	 * Gets all article elements on given page of integration
 	 * @param pageNumber number Current page index starting from 0
 	 */

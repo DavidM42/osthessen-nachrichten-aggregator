@@ -1,11 +1,19 @@
-import { OSTHESEN_NEWS_HOST, OSTHESEN_ZEITUNG_HOST } from '$lib/constants';
+import {
+	OSTHESEN_NEWS_HOST,
+	OSTHESEN_NEWS_IMAGE_CDN_HOST,
+	OSTHESEN_ZEITUNG_HOST
+} from '$lib/constants';
 import { error } from '@sveltejs/kit';
 
 /** @type {import('@sveltejs/kit').RequestHandler} */
 export async function GET({ params }) {
 	const url = new URL(params.url);
 
-	if (!url.hostname.includes(OSTHESEN_ZEITUNG_HOST) && !url.hostname.includes(OSTHESEN_NEWS_HOST)) {
+	if (
+		!url.hostname.includes(OSTHESEN_ZEITUNG_HOST) &&
+		!url.hostname.includes(OSTHESEN_NEWS_HOST) &&
+		!url.hostname.includes(OSTHESEN_NEWS_IMAGE_CDN_HOST)
+	) {
 		error(401, 'Not allowed to proxy this pag');
 	}
 

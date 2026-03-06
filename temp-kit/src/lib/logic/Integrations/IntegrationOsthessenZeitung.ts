@@ -14,6 +14,11 @@ export class IntegrationOsthessenZeitung extends BaseIntegration {
 		this.BASE_URL = OSTHESSEN_ZEITUNG_BASE_URL;
 	}
 
+	// always delivers original image urls in article snippets so no need to convert thumbnail urls to original urls like in osthessen news
+	public getOriginalImageOfThumbnail(thumbnailImgUrl: string): string {
+		return thumbnailImgUrl;
+	}
+
 	public async getArticleElements(pageNumber: number) {
 		// only use locales subpage now
 		// ignore all the fußball
