@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { browser } from '$app/environment';
 	import DarkModeToggle from '$lib/components/DarkModeToggle.svelte';
 	import GoHomeButton from '$lib/components/GoHomeButton.svelte';
 	import ImageViewer from '$lib/components/ImageViewer.svelte';
@@ -8,23 +7,7 @@
 	// filled by load function
 	let { data, params } = $props();
 
-	// optional query parameter for going back to correct page
-	const sourcePageNumberString = data.url.searchParams.get('page');
-	let sourcePageNumber: number | null = $state(null);
-	if (sourcePageNumberString) {
-		try {
-			sourcePageNumber = Number.parseInt(sourcePageNumberString);
-		} catch (e) {
-			console.warn(e);
-		}
-	}
-
-	if (!data.url && browser) {
-		data.url = new URL(window.location.href);
-	}
-
 	let imageViewerRef: ImageViewer | null = null;
-	const imageUrls = data.article?.imageUrls || [];
 </script>
 
 <svelte:head>
@@ -39,7 +22,11 @@
 </svelte:head>
 
 <main>
-	<GoHomeButton {sourcePageNumber} source={params.source} lastPageAnchor={data.article.anchorId} />
+	<GoHomeButton
+		sourcePageNumber={data.sourcePageNumber}
+		originatingFeed={data.originatingFeedIntegration || params.source}
+		lastPageAnchor={data.article.anchorId}
+	/>
 	<DarkModeToggle />
 	<!-- TODO disabled until client/server side storage topic is decided -->
 	<!-- <SponsorHaterToggle /> -->
@@ -51,12 +38,13 @@
 
 		<div class="masonry">
 			<div class="articleTxtColumn">
+				<!-- eslint-disable-next-line svelte/no-at-html-tags -->
 				<p>{@html data.article.content}</p>
 				<a class="moreInfo" href={data.articleUrl} target="_blank" rel="external"
 					>Original auf {data.currentIntegration.HOST}</a
 				>
 			</div>
-			{#each imageUrls as url, index (index)}
+			{#each data.article?.imageUrls || [] as url, index (index)}
 				<div
 					class="articleImg"
 					style="background-image: url('{url}');"
@@ -68,7 +56,7 @@
 
 	<ImageViewer
 		bind:this={imageViewerRef}
-		{imageUrls}
+		imageUrls={data.article?.imageUrls || []}
 		currentIntegration={data.currentIntegration}
 	/>
 </main>

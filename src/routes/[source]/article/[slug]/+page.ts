@@ -46,6 +46,24 @@ const getArticlePage = async (
 /** @type {import('@sveltejs/kit').Load} */
 export async function load({ url, params }) {
 	const articlePageData = await getArticlePage(params.source, params.slug);
+
+	/**
+	 * Optional query parameter to indicate which feed integration the user came from
+	 * So we can direct user via "back to feed" button on the article page
+	 */
+	const originatingFeedIntegration = url.searchParams.get('feed');
+
+	// optional query parameter for going back to correct page
+	const sourcePageNumberString = url.searchParams.get('page');
+	let sourcePageNumber: number | null = null;
+	if (sourcePageNumberString) {
+		try {
+			sourcePageNumber = Number.parseInt(sourcePageNumberString);
+		} catch {
+			/* empty */
+		}
+	}
+
 	return {
 		// TODO find out how to do this again
 		// cache page for 5 minutes
@@ -55,6 +73,10 @@ export async function load({ url, params }) {
 		articleUrl: articlePageData.articleUrl,
 		article: articlePageData.article,
 		url: url,
-		currentIntegration: currentIntegration
+		currentIntegration: currentIntegration,
+
+		// for "back to feed" button
+		sourcePageNumber: sourcePageNumber,
+		originatingFeedIntegration: originatingFeedIntegration
 	};
 }

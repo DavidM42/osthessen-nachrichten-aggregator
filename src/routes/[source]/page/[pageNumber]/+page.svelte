@@ -5,8 +5,8 @@
 
 	let { data, params } = $props();
 
-	function appendSourcePageNumberToLink(link: string) {
-		return `${link}?page=${params.pageNumber}`;
+	function appendSourcesToLink(link: string) {
+		return `${link}?page=${params.pageNumber}&feed=${params.source}`;
 	}
 
 	let currentPage = $derived(params.pageNumber);
@@ -66,7 +66,7 @@
 					<div class="articleTxtColumn">
 						<p>{@html homepageArticle.content}</p>
 						<a
-							href={appendSourcePageNumberToLink(homepageArticle.readMoreLink)}
+							href={appendSourcesToLink(homepageArticle.readMoreLink)}
 							data-sveltekit-preload-data="hover">Weiterlesen</a
 						>
 					</div>

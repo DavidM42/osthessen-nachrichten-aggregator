@@ -16,7 +16,7 @@ export interface ArticleType {
 	/** content direction */
 	dir: string;
 	/** HTML of processed article content */
-	content: any;
+	content: HTMLElement;
 	/** text content of the article (all HTML removed) */
 	textContent: string;
 	/** length of an article, in characters */
