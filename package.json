@@ -23,6 +23,7 @@
 		"@sveltejs/vite-plugin-svelte": "^6.2.4",
 		"@types/jsdom": "^16.2.14",
 		"@types/node": "^22",
+		"@vercel/analytics": "^1.6.1",
 		"dom-parse": "git+https://github.com/DavidM42/dom-parse.git#test-pre-build",
 		"eslint": "^9.39.2",
 		"eslint-config-prettier": "^10.1.8",

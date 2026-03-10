@@ -2,6 +2,7 @@
 	import { afterNavigate, beforeNavigate } from '$app/navigation';
 	import favicon from '$lib/assets/favicon.svg';
 	import FullScreenCenterLoader from '$lib/components/FullScreenCenterLoader.svelte';
+	import { injectAnalytics } from '@vercel/analytics/sveltekit';
 
 	let { children } = $props();
 
@@ -10,6 +11,8 @@
 	beforeNavigate(() => (loading = true));
 
 	afterNavigate(() => (loading = false));
+
+	injectAnalytics();
 </script>
 
 <svelte:head>
